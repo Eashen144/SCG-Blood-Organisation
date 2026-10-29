@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#9f1239">
+<meta name="description" content="S.C.G Blood Organisation — স্বেচ্ছায় রক্তদাতা খুঁজুন, ডোনার হিসেবে নিবন্ধন করুন এবং রক্তের অনুরোধ জানান।">
+<title>S.C.G Blood Organisation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">মূল কন্টেন্টে যান</a>
+
+<div class="banner" id="setupBanner" role="status" hidden>
+  <span id="setupBannerText"></span>
+  <button class="btn light" type="button" id="setupBannerClose" aria-label="বন্ধ করুন">×</button>
+</div>
+
+<!-- ================= PUBLIC SITE ================= -->
+<div id="publicApp">
+  <header class="nav">
+    <div class="wrap navin">
+      <a class="brand" href="#top">
+        <span class="logo" aria-hidden="true">♥</span>
+        <span>S.C.G BLOOD<small>ORGANISATION</small></span>
+      </a>
+      <button class="navtoggle" id="navToggle" type="button" aria-expanded="false" aria-controls="navMenu" aria-label="মেনু খুলুন">☰</button>
+      <nav class="navlinks" id="navMenu" aria-label="প্রধান মেনু">
+        <a href="#find">ডোনার খুঁজুন</a>
+        <a href="#request">রক্তের অনুরোধ</a>
+        <a href="#about">আমাদের সম্পর্কে</a>
+        <a href="#how">কীভাবে কাজ করে</a>
+        <a href="#contact">যোগাযোগ</a>
+        <button class="btn small" type="button" data-action="open-register">+ ডোনার হোন</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <span id="top"></span>
+
+    <!-- Hero -->
+    <section class="wrap hero">
+      <div>
+        <p class="eyebrow"><span class="dot" aria-hidden="true"></span> GIVE BLOOD · SAVE LIVES</p>
+        <h1>এক ব্যাগ রক্ত,<br><em>একটি নতুন জীবন।</em></h1>
+        <p class="lead">রক্তের প্রয়োজনে পাশে থাকি, মানবতার বন্ধনে। আপনার এলাকার রক্তদাতা খুঁজুন অথবা নিজেই একজন স্বেচ্ছায় রক্তদাতা হিসেবে নিবন্ধন করুন।</p>
+        <div class="actions">
+          <a class="btn" href="#find">🩸 রক্তদাতা খুঁজুন</a>
+          <button class="btn light" type="button" data-action="open-register">ডোনার হিসেবে যোগ দিন ↗</button>
+        </div>
+        <div class="stats">
+          <div class="stat"><strong id="statApproved">—</strong><span>অনুমোদিত ডোনার</span></div>
+          <div class="stat"><strong id="statAvailable">—</strong><span>বর্তমানে রক্ত দিতে প্রস্তুত</span></div>
+          <div class="stat hint"><strong>সারাদেশে</strong><span>স্বেচ্ছাসেবীদের নেটওয়ার্ক</span></div>
+        </div>
+      </div>
+      <div class="heroart" aria-hidden="true">
+        <div class="orb"><div class="blooddrop"></div></div>
+        <div class="floating f1">🩸 Blood saves lives<span>একটি দান, তিনটি জীবন</span></div>
+        <div class="floating f2">♥ Be someone's hero<span>আজই ডোনার হোন</span></div>
+      </div>
+    </section>
+
+    <!-- Donor search -->
+    <section class="section" id="find">
+      <div class="wrap">
+        <div class="sectionhead">
+          <div>
+            <p class="eyebrow">DONOR DIRECTORY</p>
+            <h2>রক্তদাতা খুঁজুন</h2>
+            <p>রক্তের গ্রুপ ও এলাকা নির্বাচন করে ডোনার খুঁজে নিন। শুধুমাত্র অ্যাডমিন কর্তৃক অনুমোদিত এবং যোগাযোগে সম্মত ডোনারদের তথ্য দেখানো হয়।</p>
+          </div>
+          <button class="btn light" type="button" data-action="open-request">+ রক্তের অনুরোধ</button>
+        </div>
+
+        <div class="noticebox" id="findNotice" role="alert" hidden></div>
+
+        <form class="searchbox" id="searchForm">
+          <div class="field">
+            <label for="filterBlood">রক্তের গ্রুপ</label>
+            <select id="filterBlood">
+              <option value="">সব গ্রুপ</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="filterLocation">জেলা / উপজেলা</label>
+            <input id="filterLocation" list="bdDistricts" placeholder="যেমন: কুমিল্লা, নাঙ্গলকোট" maxlength="80" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="filterAvailable">ডোনার স্ট্যাটাস</label>
+            <select id="filterAvailable">
+              <option value="">সব অনুমোদিত ডোনার</option>
+              <option value="yes" selected>রক্ত দিতে প্রস্তুত</option>
+            </select>
+          </div>
+          <button class="btn" type="submit" id="searchBtn">ডোনার খুঁজুন</button>
+        </form>
+
+        <p class="small muted" id="donorCount" aria-live="polite"></p>
+        <div class="donors" id="donorList">
+          <div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div>
+        </div>
+        <div class="pager hidden" id="donorPager">
+          <button class="btn light small" type="button" id="donorMore">আরও ডোনার দেখুন</button>
+          <span class="small" id="donorMoreNote"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blood request -->
+    <section class="section" id="request">
+      <div class="wrap">
+        <div class="sectionhead">
+          <div>
+            <p class="eyebrow">BLOOD REQUEST</p>
+            <h2>রক্তের প্রয়োজন?</h2>
+            <p>ফর্মটি পূরণ করে অনুরোধ জানান। অ্যাডমিন অনুরোধটি যাচাই করে ব্যবস্থা নেবেন। জরুরি অবস্থায় অবশ্যই নিকটস্থ হাসপাতাল বা জরুরি সেবায় যোগাযোগ করুন।</p>
+          </div>
+          <button class="btn" type="button" data-action="open-request">অনুরোধ জমা দিন</button>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">1</div>
+            <h3>প্রয়োজনের তথ্য দিন</h3>
+            <p>রক্তের গ্রুপ, ব্যাগ সংখ্যা, হাসপাতাল, জেলা ও যোগাযোগ নম্বর দিন।</p>
+          </div>
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">2</div>
+            <h3>অ্যাডমিন যাচাই করবেন</h3>
+            <p>অনুরোধ অ্যাডমিন প্যানেলে যাচাই করা হয়। আপনার নম্বর প্রকাশ্যে দেখানো হয় না।</p>
+          </div>
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">3</div>
+            <h3>যোগাযোগ ও ব্যবস্থা</h3>
+            <p>ডোনার ও রক্তপ্রার্থীর মধ্যে সমন্বয় করা হয়। রক্তদানের যোগ্যতা চিকিৎসকের পরামর্শ অনুযায়ী নির্ধারিত হবে।</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="sectionhead">
+          <div>
+            <p class="eyebrow">WHY S.C.G?</p>
+            <h2>মানবতার জন্য একসাথে</h2>
+            <p>নিরাপদ, সহজ এবং দায়িত্বশীল রক্তদানের যোগাযোগমাধ্যম।</p>
+          </div>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">🩸</div>
+            <h3>সহজে ডোনার খুঁজুন</h3>
+            <p>রক্তের গ্রুপ ও এলাকা অনুযায়ী প্রাসঙ্গিক ডোনারের তথ্য খুঁজে নিন।</p>
+          </div>
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">🤝</div>
+            <h3>স্বেচ্ছায় ডোনার হোন</h3>
+            <p>নিজের তথ্য দিয়ে নিবন্ধন করুন। অ্যাডমিন যাচাইয়ের পর আপনার তথ্য তালিকায় প্রকাশিত হবে।</p>
+          </div>
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">🛡️</div>
+            <h3>দায়িত্বশীল যোগাযোগ</h3>
+            <p>ডোনারের সম্মতি নিয়ে যোগাযোগ করুন। জরুরি চিকিৎসার জন্য হাসপাতালের সহায়তা নিন।</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section class="section" id="how">
+      <div class="wrap">
+        <div class="sectionhead">
+          <div>
+            <p class="eyebrow">HOW IT WORKS</p>
+            <h2>মাত্র তিনটি ধাপ</h2>
+          </div>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">01</div>
+            <h3>রক্তের গ্রুপ বাছাই করুন</h3>
+            <p>আপনার প্রয়োজনীয় গ্রুপ ও এলাকা নির্বাচন করুন।</p>
+          </div>
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">02</div>
+            <h3>ডোনার নির্বাচন করুন</h3>
+            <p>ডোনারের তথ্য দেখে উপযুক্ত ব্যক্তিকে বেছে নিন।</p>
+          </div>
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">03</div>
+            <h3>যোগাযোগ করুন</h3>
+            <p>ডোনারের সম্মতি নিয়ে যোগাযোগ করে হাসপাতালের মাধ্যমে রক্তদানের ব্যবস্থা করুন।</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="sectionhead">
+          <div>
+            <p class="eyebrow">CONTACT &amp; SUPPORT</p>
+            <h2>যোগাযোগ ও তথ্য সংশোধন</h2>
+            <p>নিবন্ধন সংক্রান্ত প্রশ্ন, তথ্য সংশোধন বা তালিকা থেকে নাম সরানোর অনুরোধ জানাতে যোগাযোগ করুন।</p>
+          </div>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">✉️</div>
+            <h3>যোগাযোগ</h3>
+            <div id="contactDetails" class="small muted">যোগাযোগের তথ্য শীঘ্রই যুক্ত হবে।</div>
+          </div>
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">🔒</div>
+            <h3>গোপনীয়তা ও সম্মতি</h3>
+            <p>কোন তথ্য সংগ্রহ করা হয় এবং কে দেখতে পারেন—বিস্তারিত জানুন।</p>
+            <button class="btn light small" type="button" data-action="open-privacy" style="margin-top:10px">গোপনীয়তা নোটিশ</button>
+          </div>
+          <div class="feature">
+            <div class="featicon" aria-hidden="true">🩺</div>
+            <h3>চিকিৎসা সংক্রান্ত সতর্কতা</h3>
+            <p>এই ওয়েবসাইট কোনো চিকিৎসা সেবা নয় এবং ডোনারের চিকিৎসাগত যোগ্যতার নিশ্চয়তা দেয় না। রক্তদানের আগে যোগ্যতা ও নিরাপত্তা হাসপাতাল/চিকিৎসাকর্মীর মাধ্যমে নিশ্চিত করুন।</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footerin">
+      <div>
+        <div>© <span id="year">2026</span> S.C.G Blood Organisation. Made with ♥ for humanity.</div>
+        <div class="tiny" style="margin-top:6px">জরুরি অবস্থায় নিকটস্থ হাসপাতাল বা জরুরি সেবায় যোগাযোগ করুন।</div>
+      </div>
+      <nav aria-label="ফুটার মেনু">
+        <a href="#find">ডোনার খুঁজুন</a>
+        <a href="#request">রক্তের অনুরোধ</a>
+        <button class="linkbtn" type="button" data-action="open-privacy">গোপনীয়তা</button>
+        <button class="linkbtn" type="button" data-action="open-remove">তথ্য সংশোধন / সরানোর অনুরোধ</button>
+        <a href="?admin=1" rel="nofollow">Admin</a>
+      </nav>
+    </div>
+  </footer>
+</div>
+
+<!-- ================= ADMIN PANEL ================= -->
+<div id="adminApp" class="adminview">
+  <!-- Authentication gate: nothing else in the admin panel is shown until
+       the session AND the admin_users record have both been verified. -->
+  <div class="adminauth" id="adminAuth">
+    <div class="authcard">
+      <div class="brand" style="font-size:16px">
+        <span class="logo" aria-hidden="true">♥</span>
+        <span>S.C.G BLOOD<small>ADMIN</small></span>
+      </div>
+
+      <div id="authVerifying">
+        <h1>যাচাই করা হচ্ছে…</h1>
+        <p>Admin session ও অনুমতি যাচাই করা হচ্ছে।</p>
+      </div>
+
+      <div id="authMessage" class="hidden">
+        <h1 id="authMessageTitle">প্রবেশ করা যায়নি</h1>
+        <p id="authMessageText"></p>
+        <button class="btn block" type="button" id="authMessageAction">আবার চেষ্টা করুন</button>
+        <p class="tiny" style="margin-top:14px"><a href="./" id="authBackLink">← মূল ওয়েবসাইটে ফিরে যান</a></p>
+      </div>
+
+      <form id="loginForm" class="hidden" novalidate>
+        <h1>Admin Login</h1>
+        <p>শুধুমাত্র অনুমোদিত Admin প্রবেশ করতে পারবেন। এটি পাবলিক সাইন-আপ নয়।</p>
+        <div class="field">
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" name="email" type="email" required autocomplete="username" inputmode="email">
+        </div>
+        <div class="field">
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" name="password" type="password" required autocomplete="current-password" minlength="8">
+        </div>
+        <div class="noticebox" id="loginError" role="alert" hidden></div>
+        <button class="btn block" type="submit" id="loginBtn">Secure Login</button>
+        <p class="tiny" style="margin-top:12px">পাসওয়ার্ড ভুলে গেলে Supabase Dashboard → Authentication থেকে রিসেট করুন।</p>
+        <p class="tiny" style="margin-top:14px"><a href="./">← মূল ওয়েবসাইটে ফিরে যান</a></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="adminShell" class="hidden">
+    <div class="adminnav">
+      <div class="brand" style="font-size:15px">
+        <span class="logo" aria-hidden="true">♥</span>
+        <span>S.C.G <small>ADMIN CONTROL CENTER</small></span>
+      </div>
+      <div class="row">
+        <span class="small" id="adminEmail" style="color:#f3dde5"></span>
+        <a class="btn light small" href="./" id="viewSiteLink">ওয়েবসাইট ↗</a>
+        <button class="btn small" type="button" id="logoutBtn">Logout</button>
+      </div>
+    </div>
+    <div class="adminlayout">
+      <aside class="sidebar" aria-label="Admin sections">
+        <button class="sidebtn active" type="button" data-tab="overview">Overview</button>
+        <button class="sidebtn" type="button" data-tab="donors">Donors <span class="count hidden" id="sideCountDonors"></span></button>
+        <button class="sidebtn" type="button" data-tab="requests">Blood Requests <span class="count hidden" id="sideCountRequests"></span></button>
+        <button class="sidebtn" type="button" data-tab="ads">Ads Manager</button>
+        <button class="sidebtn" type="button" data-tab="admins">Admin Users</button>
+        <button class="sidebtn" type="button" data-tab="settings">Setup &amp; Settings</button>
+      </aside>
+
+      <div class="adminmain" id="adminMain">
+        <div class="noticebox" id="adminNotice" role="alert" hidden></div>
+
+        <!-- Overview -->
+        <section id="tab-overview">
+          <h1>Dashboard</h1>
+          <p class="muted">S.C.G Blood Organisation পরিচালনা করুন। সব সংখ্যা বাস্তব ডাটাবেস থেকে গণনা করা হয়।</p>
+          <div class="admincards" id="overviewCards">
+            <div class="admincard"><b id="stApproved">—</b><span>অনুমোদিত ডোনার</span></div>
+            <div class="admincard"><b id="stPending">—</b><span>অপেক্ষমাণ নিবন্ধন</span></div>
+            <div class="admincard"><b id="stRequests">—</b><span>মোট রক্তের অনুরোধ</span></div>
+            <div class="admincard"><b id="stReqPending">—</b><span>অপেক্ষমাণ অনুরোধ</span></div>
+            <div class="admincard"><b id="stReqFulfilled">—</b><span>সম্পন্ন অনুরোধ</span></div>
+            <div class="admincard"><b id="stReqRejected">—</b><span>বাতিল অনুরোধ</span></div>
+            <div class="admincard"><b id="stAdsLive">—</b><span>সক্রিয় বিজ্ঞাপন</span></div>
+          </div>
+          <div class="adminsection">
+            <h2>Quick actions</h2>
+            <div class="row" style="margin-top:10px">
+              <button class="btn small" type="button" data-goto="donors">ডোনার অনুমোদন করুন</button>
+              <button class="btn small light" type="button" data-goto="requests">অনুরোধ পর্যালোচনা</button>
+              <button class="btn small light" type="button" data-goto="ads">বিজ্ঞাপন তৈরি করুন</button>
+            </div>
+            <p class="small muted" style="margin:12px 0 0" id="statsTimestamp"></p>
+          </div>
+        </section>
+
+        <!-- Donors -->
+        <section id="tab-donors" class="hidden">
+          <div class="spread">
+            <div>
+              <h1>Donor Management</h1>
+              <p class="muted">নিবন্ধন যাচাই, অনুমোদন ও তথ্য সম্পাদনা করুন।</p>
+            </div>
+            <button class="btn small" type="button" id="addDonorBtn">+ অ্যাডমিন ডোনার</button>
+          </div>
+          <div class="adminsection">
+            <form class="filters" id="donorFilters">
+              <div class="field">
+                <label for="dSearch">খুঁজুন</label>
+                <input id="dSearch" placeholder="নাম, ফোন, এলাকা" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="dStatus">Status</label>
+                <select id="dStatus">
+                  <option value="">সব</option>
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="dGroup">Blood group</label>
+                <select id="dGroup">
+                  <option value="">সব</option>
+                  <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                  <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="dApply">&nbsp;</label>
+                <button class="btn light small" type="submit" id="dApply">ফিল্টার প্রয়োগ</button>
+              </div>
+            </form>
+            <div id="adminDonors"><p class="small muted">লোড হচ্ছে…</p></div>
+            <div class="pager hidden" id="donorPagerAdmin">
+              <button class="btn light small" type="button" id="dPrev">← আগের</button>
+              <span class="small" id="dPageInfo"></span>
+              <button class="btn light small" type="button" id="dNext">পরের →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Requests -->
+        <section id="tab-requests" class="hidden">
+          <h1>Blood Requests</h1>
+          <p class="muted">অনুরোধ পর্যালোচনা করুন, স্ট্যাটাস হালনাগাদ করুন এবং প্রয়োজনে মুছে ফেলুন।</p>
+          <div class="adminsection">
+            <form class="filters" id="requestFilters">
+              <div class="field">
+                <label for="rSearch">খুঁজুন</label>
+                <input id="rSearch" placeholder="রোগী, হাসপাতাল, ফোন" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="rStatus">Status</label>
+                <select id="rStatus">
+                  <option value="">সব</option>
+                  <option value="pending">Pending</option>
+                  <option value="approved">Approved</option>
+                  <option value="fulfilled">Fulfilled</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="rGroup">Blood group</label>
+                <select id="rGroup">
+                  <option value="">সব</option>
+                  <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+                  <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="rFrom">তারিখ থেকে</label>
+                <input id="rFrom" type="date">
+              </div>
+              <div class="field">
+                <label for="rTo">তারিখ পর্যন্ত</label>
+                <input id="rTo" type="date">
+              </div>
+              <div class="field">
+                <label for="rApply">&nbsp;</label>
+                <button class="btn light small" type="submit" id="rApply">ফিল্টার প্রয়োগ</button>
+              </div>
+            </form>
+            <div id="adminRequests"><p class="small muted">লোড হচ্ছে…</p></div>
+            <div class="pager hidden" id="requestPagerAdmin">
+              <button class="btn light small" type="button" id="rPrev">← আগের</button>
+              <span class="small" id="rPageInfo"></span>
+              <button class="btn light small" type="button" id="rNext">পরের →</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Ads -->
+        <section id="tab-ads" class="hidden">
+          <h1>Ads Manager</h1>
+          <p class="muted">নির্দিষ্ট সময়ের মধ্যে ওয়েবসাইটে দেখানো বিজ্ঞাপন তৈরি ও পরিচালনা করুন। সময় শেষ হলে বিজ্ঞাপন স্বয়ংক্রিয়ভাবে দেখানো বন্ধ হয়।</p>
+          <div class="adminsection">
+            <h2>নতুন বিজ্ঞাপন</h2>
+            <form id="adForm" class="formgrid" style="margin-top:12px" novalidate>
+              <div class="field full">
+                <label for="adTitle">শিরোনাম</label>
+                <input id="adTitle" maxlength="120" required>
+              </div>
+              <div class="field full">
+                <label for="adText">বার্তা</label>
+                <textarea id="adText" rows="3" maxlength="2000" required></textarea>
+              </div>
+              <div class="field">
+                <label for="adStart">শুরুর সময়</label>
+                <input id="adStart" type="datetime-local">
+                <span class="hint">খালি রাখলে এখন থেকেই শুরু হবে।</span>
+              </div>
+              <div class="field">
+                <label for="adEnd">শেষের সময়</label>
+                <input id="adEnd" type="datetime-local" required>
+              </div>
+              <div class="field">
+                <label for="adButton">বাটন টেক্সট (ঐচ্ছিক)</label>
+                <input id="adButton" maxlength="40" placeholder="Learn more">
+              </div>
+              <div class="field">
+                <label for="adUrl">বাটন URL (ঐচ্ছিক, https)</label>
+                <input id="adUrl" type="url" placeholder="https://…">
+              </div>
+              <div class="full row">
+                <button class="btn" type="submit" id="adSaveBtn">বিজ্ঞাপন সংরক্ষণ করুন</button>
+                <button class="btn light" type="button" id="adPreviewBtn">প্রিভিউ</button>
+              </div>
+            </form>
+          </div>
+          <div class="adminsection">
+            <h2>সব বিজ্ঞাপন</h2>
+            <div id="adminAds"><p class="small muted">লোড হচ্ছে…</p></div>
+          </div>
+        </section>
+
+        <!-- Admin users -->
+        <section id="tab-admins" class="hidden">
+          <h1>Admin Users</h1>
+          <p class="muted">অনুমোদিত অ্যাডমিনদের তালিকা। নতুন অ্যাডমিন শুধুমাত্র owner তৈরি করতে পারেন।</p>
+          <div class="adminsection">
+            <h2>Admin accounts</h2>
+            <div id="adminUsersList"><p class="small muted">লোড হচ্ছে…</p></div>
+          </div>
+          <div class="adminsection" id="createAdminBox">
+            <h2>নতুন অ্যাডমিন</h2>
+            <p>নতুন অ্যাডমিন তৈরি হয় Supabase Edge Function (<code>admin-create-user</code>) দিয়ে—আপনার সেশন যাচাই করে সার্ভারে।</p>
+            <form id="createAdminForm" class="formgrid" style="margin-top:12px" novalidate>
+              <div class="field">
+                <label for="newAdminEmail">Email</label>
+                <input id="newAdminEmail" type="email" autocomplete="off" required>
+              </div>
+              <div class="field">
+                <label for="newAdminPassword">অস্থায়ী পাসওয়ার্ড</label>
+                <input id="newAdminPassword" type="password" minlength="10" autocomplete="new-password" required>
+                <span class="hint">কমপক্ষে ১০ অক্ষর। ব্যবহারকারীকে পরে পাসওয়ার্ড বদলাতে বলুন।</span>
+              </div>
+              <div class="full">
+                <button class="btn" type="submit" id="createAdminBtn">Create admin</button>
+              </div>
+            </form>
+            <div class="noticebox" id="createAdminNotice" role="alert" hidden></div>
+          </div>
+        </section>
+
+        <!-- Settings -->
+        <section id="tab-settings" class="hidden">
+          <h1>Setup &amp; Settings</h1>
+          <p class="muted">নিরাপত্তার কারণে কোনো ডাটাবেস পাসওয়ার্ড বা service-role key এই সাইটের কোডে রাখা হয় না।</p>
+          <div class="adminsection">
+            <h2>সংযোগ পরীক্ষা</h2>
+            <div id="diagBox" class="small">চেক করা হচ্ছে…</div>
+          </div>
+          <div class="adminsection">
+            <h2>করণীয় (Supabase Dashboard)</h2>
+            <ul class="small" style="line-height:1.9;padding-left:18px;margin:0">
+              <li>Authentication → Providers → Email → <b>Allow new users to sign up</b> বন্ধ রাখুন।</li>
+              <li>Authentication → URL Configuration → Site URL = আপনার লাইভ সাইটের ঠিকানা।</li>
+              <li>Database → Migrations: <code>supabase/migrations/</code> ফাইলগুলো এই ক্রমে প্রয়োগ করুন।</li>
+              <li>Edge Functions → <code>admin-create-user</code> ডিপ্লয় করুন এবং <code>SUPABASE_SERVICE_ROLE_KEY</code> শুধুমাত্র secret হিসেবে রাখুন।</li>
+            </ul>
+            <a class="btn light small" style="margin-top:12px" href="https://supabase.com/dashboard/project/kyueuqzxckjsmgyrrehm" target="_blank" rel="noopener noreferrer">Supabase Dashboard ↗</a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<datalist id="bdDistricts"></datalist>
+
+<!-- Shared modal -->
+<div class="modalback" id="modalback">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modal">
+    <button class="close" type="button" id="modalClose" aria-label="বন্ধ করুন">×</button>
+    <h2 id="modalTitle">S.C.G Blood Organisation</h2>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="assets/config.js"></script>
+<script src="assets/vendor/supabase-js.min.js"></script>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

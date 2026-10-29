@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>S.C.G Blood Organisation — পৃষ্ঠা খুঁজে পাওয়া যায়নি</title>
+<meta name="robots" content="noindex">
+<style>
+  :root { color-scheme: light; }
+  body {
+    margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; color: #18111b;
+    background: radial-gradient(circle at 80% 0, #ffe0e8 0, transparent 34%), linear-gradient(180deg, #fff7f9, #fff);
+  }
+  .card {
+    width: min(460px, 100%); background: #fff; border: 1px solid #f1dfe5; border-radius: 22px;
+    padding: 26px; box-shadow: 0 18px 55px rgba(130, 20, 55, .1); text-align: center;
+  }
+  .logo {
+    width: 46px; height: 46px; margin: 0 auto 14px; border-radius: 15px; display: grid; place-items: center;
+    background: linear-gradient(135deg, #e11d48, #881337); color: #fff; font-size: 20px;
+  }
+  h1 { font-size: 19px; margin: 0 0 8px; letter-spacing: -.4px; }
+  p { color: #6b6470; font-size: 13.5px; line-height: 1.7; margin: 0 0 16px; }
+  a.btn {
+    display: inline-block; padding: 11px 18px; border-radius: 12px; background: #be123c; color: #fff;
+    text-decoration: none; font-weight: 700; font-size: 14px; white-space: nowrap;
+  }
+  a.btn:hover { background: #9f1239; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo" aria-hidden="true">♥</div>
+  <h1>পৃষ্ঠাটি পাওয়া যায়নি</h1>
+  <p>আপনি যে ঠিকানায় এসেছেন সেটি এই ওয়েবসাইটে নেই। নিচের বাটন থেকে মূল পেজে ফিরে যান।</p>
+  <a class="btn" id="homeLink" href="./">মূল পেজে ফিরে যান</a>
+</div>
+<script>
+// GitHub Pages has no SPA fallback, so it serves this file (with a 404 status)
+// for unknown paths. Two jobs:
+//   1. /admin (and /admin/) -> the app with ?admin=1 so the admin panel opens.
+//   2. everything else      -> the site root, which is always a real page,
+//                              so a mistyped URL can never bounce forever.
+(function () {
+  var path = location.pathname.replace(/\/+$/, '');
+  var home = document.getElementById('homeLink');
+  var root = path.replace(/\/[^/]*$/, '') || '/';
+
+  if (/\/admin$/i.test(path)) {
+    location.replace(root + '/?admin=1' + (location.hash || ''));
+    return;
+  }
+
+  home.setAttribute('href', root + '/');
+})();
+</script>
+</body>
+</html>
